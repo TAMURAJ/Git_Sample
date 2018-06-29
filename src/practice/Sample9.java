@@ -1,5 +1,8 @@
 package practice;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,11 +27,13 @@ public class Sample9 {
 											"以前から存在すること","欠けて足りないこと","物事を、いろいろな要素を含めてよく考えること","そのことが正当または事実であると認めること","うつりかわること","ひどく義理がたいこと。実直なこと。","世に広まること。広く世間に行き渡ること。","他人の秘密・悪事などをあばいて明るみに出すこと。","別棟に設けた物置用の小屋。","そのことだけに心を集中して努力すること。",
 											" 世間の人の目にうつる自分のかっこう。世間体","貸し借り・損得などを互いに消し合ってゼロにすること\n相反するものが互いに影響し合って、その効果などが差し引きされること。","本来の望み。もとから抱いている志。","巧みに機会をとらえて利用すること"," ある抽象的な特質が、具体的な姿をとって現れたかのように思える人やもの","軽くあいさつや礼を交わすこと。","寺院や堂・塔などを建てること\n築き上げること","品物や資料などを、広く配ること。","物事がとどこおってすらすらと進まないこと。","二つ以上の案のよいところをとり合わせて、一つにまとめた案。",
 											"詳しく細かいこと","規律や道徳にきびしく、不正や怠慢を許さないこと","互いに共通点があること。似かようこと",")最後までやりとおすこと。完全に成し遂げること","礼儀正しいこと。丁重で親切なこと","その場にかもし出されている気分","間に入って双方をうまく取り持つこと","物事が滞らず、すらすら運ぶこと","順を追って次々に物事がなされるさま","文章・答案などを、書き加えたり削ったりして、改め直すこと"};
+		Map<String,String> wrong =new HashMap<String,String>();
 		System.out.println("漢字の読みをひらがなで入力してください");
 
 
 		String retry;
 		String giveUp;
+		String wrongAnswer;
 		boolean loop = true;
 		int last=-1;
 		do {
@@ -49,6 +54,7 @@ public class Sample9 {
 				}
 				else{b++;
 				System.out.println("違います");
+				wrong.put(kanjiString[hiragana],hiraganaString[hiragana]);
 				System.out.print("あきらめて正解を見ますか？ Yes _う / No _え :");
 				giveUp=sc.next();
 
@@ -64,7 +70,16 @@ public class Sample9 {
 		}while(retry.equals("あ"));
 		System.out.println();
 		System.out.println("正解数："+a+"間違い数:"+b);
-
+		System.out.println();
+		System.out.print("間違えた問題を見たければ「お」を押してください :");
+		wrongAnswer=sc.next();
+		if(wrongAnswer.equals("お")) {
+			Iterator it = wrong.keySet().iterator();
+			while(it.hasNext()) {
+				Object o = it.next();
+				System.out.println(o+"/"+wrong.get(o));
+			}
+		}
 	sc.close();
 	}
 
